@@ -25,6 +25,10 @@
  * @return {String} отформатированная строка.
  */
 
+function format (token, values){
+
+}
+ 
 /**
  * Задание 2. Создать функцию repeat.
  *
@@ -44,6 +48,34 @@
  * @return {String} Строка с повотрениями.
  */
 
+ function repeat(str, count, sym){
+	function isNumber(x){
+ 		return (typeof x === "number") && !isNaN(x) && isFinite(x);
+ 	}
+
+ 	if(arguments.length < 2){
+ 		throw new Error("Invalid arguments");
+ 	}
+
+ 	if(!isNumber(count)){
+ 		throw new Error("Invalid arguments");
+ 	}
+	
+	var repeatStr = '';
+	if (sym == null) {
+		for (var i = 1; i <= count; i++) {
+			repeatStr += str;
+		}
+	} else {
+		for (var i = 1; i < count; i++) {
+			repeatStr += str + sym;
+		}
+		repeatStr += str;
+	}
+	return repeatStr;
+}
+
+ 
 /**
  * Задание 3. Создать функцию toGetParams, формирующую из
  * объекта строку параметров для GET-запроса.
@@ -57,6 +89,14 @@
  * @return {String} строка параметров.
  */
 
+function toGetParams(obj){
+    var params = "";
+    for ( var i in obj){
+        params += i + "=" + obj[i] + "&";
+    }
+    return (params.substring(0, params.length - 1));
+}
+ 
 /**
  * Задание 4. Создать функцию formatUrl, формирующую из базового url и объекта
  * строку GET-запроса.
@@ -73,6 +113,16 @@
  * @return {String} сформированный url.
  */
 
+function formatUrl(url, obj){
+	var params = "";
+    for ( var i in obj){
+        params += i + "=" + obj[i] + "&";
+    }
+    params = params.substring(0, params.length - 1);
+	var formedUrl = url + "?" + params;
+	return formedUrl;
+}
+ 
 /**
  * Задание 5. Создать функцию startsWith, возвращающая true, если строка, переданная
  * в качестве первого аргумента начинается со строки, переданной в качестве второго аргумента,
@@ -91,6 +141,30 @@
  * @return {Boolean} Результат проверки.
  */
 
+function startsWith(str, prefix){
+	if(arguments.length < 2){
+ 		throw new Error("Invalid arguments");
+ 	}
+	
+	var isPrefix = true;
+	var n = prefix.length;
+	var m = str.length;
+	
+	if (n > m) {
+		throw new Error("Invalid arguments");
+	} else {
+		do {
+			if (prefix.charAt(i) === str.charAt(i)){
+				isPrefix = true;
+			} else {
+				isPrefix = false;
+				break;
+			}
+		} while ((isPrefix = true) && (i <= m));
+	}
+	return isPrefix;
+} 
+ 
 /**
  * Задание 6. Создать функцию endsWith, возвращающая true, если строка, переданная
  * в качестве первого аргумента оканчивается на строку, переданную в качестве второго аргумента,
@@ -108,3 +182,29 @@
  *
  * @return {Boolean} Результат проверки.
  */
+
+function endsWith(str, suffix){
+	if(arguments.length < 2){
+ 		throw new Error("Invalid arguments");
+ 	}
+	
+	var isSuffix = true;;
+	var n = suffix.length;
+	var m = str.length;
+	
+	if (n > m) {
+		throw new Error("Invalid arguments");
+	} else {
+		i = n;
+		do {
+			if (suffix.charAt(i) === str.charAt(i)){
+				isSuffix = true;
+				i ++;
+			} else {
+				isSuffix = false;
+				break;
+			}
+		} while ((isSuffix = true) && (i <= m));
+	}	
+	return isSuffix;
+}
