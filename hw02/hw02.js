@@ -36,8 +36,8 @@ function Warrior(name, level){
  * @return {Number} Урон, наносимой атакой.
  */
 Warrior.prototype.attack = function () {
-	var Number;
-	return Number = Warrior.level * 0,1;
+	
+	return this.level * 0,1;
 };
 
 /**
@@ -84,7 +84,7 @@ Sith.prototype = new Warrior;
  * @return {String} Кодекс воина.
  */
 Warrior.prototype.getCode = function (){
-	if (Warrior == Jedi) {
+	if (this instanceof Jedi) {
 		return "Нет волнения — есть покой...";
 	} else {
 		return "Спокойствие — ложь, есть только страсть...";
